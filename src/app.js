@@ -1,53 +1,23 @@
-export default class Team {
-  constructor() {
-    this.members = new Set([
-      {
-        name: 'Лучник1',
-        type: 'Bowman1',
-        health: 50,
-        level: 1,
-        attack: 40,
-        defence: 10,
-      },
-      {
-        name: 'Лучник2',
-        type: 'Bowman2',
-        health: 50,
-        level: 1,
-        attack: 40,
-        defence: 10,
-      },
-      {
-        name: 'Лучник3',
-        type: 'Bowman3',
-        health: 50,
-        level: 1,
-        attack: 40,
-        defence: 10,
-      },
-    ]);
-  }
+import Team from './Team';
+import Person from './Person';
 
-  [Symbol.iterator]() {
-    const team = this.members;
-    const teamArr = [];
-    for (const person of team) {
-      teamArr.push(person);
-    }
-    return {
-      next() {
-        if (teamArr.length > 0) {
-          const teamArrPerson = teamArr[0];
-          teamArr.shift();
-          return {
-            done: false,
-            value: teamArrPerson,
-          };
-        }
-        return {
-          done: true,
-        };
-      },
-    };
-  }
+const person1 = new Person();
+const person2 = new Person();
+const person3 = new Person();
+
+const team = new Team('Reya');
+team.add(person1);
+team.add(person2);
+team.add(person3);
+
+console.log(team);
+
+const iterator = team[Symbol.iterator]();
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+
+for (const unit of team) {
+  console.log(unit);
 }
